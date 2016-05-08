@@ -1,4 +1,4 @@
 rootProject.name = 'food-journal'
 include 'discovery-service'
-include 'user-service'
+include 'account-service'
 
