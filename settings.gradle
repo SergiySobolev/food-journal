@@ -1,4 +1,5 @@
 rootProject.name = 'food-journal'
 include 'discovery-service'
 include 'account-service'
+include 'nutrition-service'
 
