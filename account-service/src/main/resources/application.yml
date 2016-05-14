@@ -1,16 +1,18 @@
 server:
   port: 8081
   application:
-    name: account-service
+    name: account
+  cloud:
+      config:
+        discovery:
+          enabled: true
+          serviceId: account
+
 
 eureka:
   client:
     serviceUrl:
       defaultZone: ${vcap.services.eureka-service.credentials.uri:http://127.0.0.1:8761}/eureka/
-
-info:
-  component: Account  Service
-
 ---
 spring:
   profiles: cloud

@@ -1,31 +1,42 @@
 group 'com.sbk'
 version '1.0-SNAPSHOT'
+
 buildscript {
+    ext {
+        ioDependencyManagementVersion = '0.5.6.RELEASE'
+        springBootGradlePlugin = '1.3.5.BUILD-SNAPSHOT'
+    }
     repositories {
         jcenter()
         maven { url "http://repo.spring.io/libs-snapshot-local" }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.0.BUILD-SNAPSHOT"
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootGradlePlugin"
+        classpath "io.spring.gradle:dependency-management-plugin:$ioDependencyManagementVersion"
     }
 }
+
 subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: "io.spring.dependency-management"
+
     dependencyManagement {
         imports {
-            mavenBom 'org.springframework.cloud:spring-cloud-starter-parent:Brixton.M3'
+            def netflixBomVersion = "1.1.0.RELEASE"
+            def cloudStarterBomVersion = "Brixton.M3"
+//            mavenBom "org.springframework.cloud:spring-cloud-netflix:$netflixBomVersion"
+            mavenBom "org.springframework.cloud:spring-cloud-starter-parent:$cloudStarterBomVersion"
         }
     }
 
     dependencies {
         compile 'org.springframework.boot:spring-boot-starter-web'
+        compile 'org.springframework.cloud:spring-cloud-starter-feign'
+        //compile 'org.springframework.cloud:spring-cloud-starter-hystrix'
         testCompile 'org.springframework.boot:spring-boot-starter-test'
         testCompile "junit:junit"
     }
-
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: "io.spring.dependency-management"
 
     repositories {
         mavenCentral()
@@ -37,5 +48,10 @@ subprojects {
     }
 }
 
+configure(subprojects - project(':shared')) {
+    dependencies {
+        compile project(':shared')
+    }
+}
 
 

@@ -1,6 +1,12 @@
 apply plugin: 'spring-boot'
 dependencies {
+    ext.feignVersion = '8.16.2'
     compile 'org.springframework.cloud:spring-cloud-starter-eureka-server'
+//    compile "org.springframework.cloud:spring-cloud-starter-eureka"
+    compile "com.netflix.feign:feign-core:$feignVersion"
+//    compile "com.netflix.feign:feign-slf4j:$feignRibbonVersion"
+//    compile "com.netflix.feign:feign-ribbon:$feignRibbonVersion"
+//    compile group: 'com.netflix.feign', name: 'feign-slf4j', version: '7.0.0'
 }
 
 

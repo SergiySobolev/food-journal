@@ -12,5 +12,10 @@ public class AccountController {
         return HttpStatus.OK;
     }
 
+    @RequestMapping(value = "/account")
+    public HttpStatus account() {
+        return HttpStatus.OK;
+    }
+
 
 }
